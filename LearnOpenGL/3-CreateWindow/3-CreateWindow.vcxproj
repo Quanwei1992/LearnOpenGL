@@ -22,6 +22,7 @@
     <ProjectGuid>{36D94887-EF06-4680-86D4-019C54EAEE8C}</ProjectGuid>
     <RootNamespace>My3CreateWindow</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>4-HelloWindow</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
