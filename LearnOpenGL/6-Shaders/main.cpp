@@ -97,7 +97,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT);
 		
 		ourShader.Use();
-
+		glUniform2f(glGetUniformLocation(ourShader.Program, "offset"), 0.5f, 0.5f);
 		glBindVertexArray(VBO);
 		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
