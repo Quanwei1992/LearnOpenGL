@@ -21,18 +21,17 @@
 
 // Function prototypes
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void cursor_position_callback(GLFWwindow* window, double x, double y);
 
 // Window dimensions
 const GLuint WIDTH = 800, HEIGHT = 600;
 
-float gMixValue = 0.0f;
+float gMixValue = 0.2f;
+glm::mat4 trans;
 
 // The MAIN function, from here we start the application and run the game loop
 int main()
 {
-
-
-
 
 	// Init GLFW
 	glfwInit();
@@ -48,6 +47,7 @@ int main()
 
 	// Set the required callback functions
 	glfwSetKeyCallback(window, key_callback);
+	glfwSetCursorPosCallback(window, cursor_position_callback);
 
 	// Set this to true so GLEW knows to use a modern approach to retrieving function pointers and extensions
 	glewExperimental = GL_TRUE;
@@ -170,12 +170,9 @@ int main()
 		glUniform1f(glGetUniformLocation(ourShader.Program, "mixValue"), gMixValue);
 
 
-		glm::mat4 trans;
-
-		float angle = glm::radians(50.0f * (GLfloat)glfwGetTime());
 		
-		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-		trans = glm::rotate(trans, angle, glm::vec3(0,0,1));
+
+
 		
 
 		glUniformMatrix4fv(glGetUniformLocation(ourShader.Program, "transform"),1,GL_FALSE, glm::value_ptr(trans));
@@ -185,14 +182,6 @@ int main()
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
-		glm::mat4 trans2;
-
-		float scale = sin(glfwGetTime());
-		
-		trans2 = glm::translate(trans2, glm::vec3(-0.5f, 0.5f, 0.0f));
-		trans2 = glm::scale(trans2, glm::vec3(scale,scale,scale));
-		glUniformMatrix4fv(glGetUniformLocation(ourShader.Program, "transform"), 1, GL_FALSE, glm::value_ptr(trans2));
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		glBindVertexArray(0);
 
@@ -208,6 +197,26 @@ int main()
 	return 0;
 }
 
+double mouse_x = 0, mouse_y = 0;
+
+void cursor_position_callback(GLFWwindow* window, double x, double y)
+{
+	double offset_x, offset_y;
+	offset_x = (x - mouse_x) / WIDTH;
+	offset_y = (1-(y - mouse_y) / HEIGHT);
+	std::cout << offset_x << "," << offset_y << std::endl;
+	if (glfwGetMouseButton(window,GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+		float angle_x = glm::radians(360.0f) * offset_x;
+		float angle_y = glm::radians(360.0f) * offset_y;
+		trans = glm::rotate(trans, angle_x, glm::vec3(0, 1, 0));
+		trans = glm::rotate(trans, angle_y, glm::vec3(1, 0, 0));
+	}
+	mouse_x = x;
+	mouse_y = y;
+	return;
+}
+
+
 // Is called whenever a key is pressed/released via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
@@ -216,12 +225,30 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 	if (key == GLFW_KEY_UP && action == GLFW_PRESS)
 	{
-		gMixValue += 0.05f;
+		//gMixValue += 0.05f;
+		float angle = glm::radians(5.0f);
+		trans = glm::rotate(trans, angle, glm::vec3(1, 0, 0));
 	}
 	if (key == GLFW_KEY_DOWN && action == GLFW_PRESS)
 	{
-		gMixValue -= 0.05f;
+		//gMixValue -= 0.05f;
+		float angle = glm::radians(-5.0f);
+		trans = glm::rotate(trans, angle, glm::vec3(1, 0, 0));
 	}
+
+	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
+	{
+		//gMixValue += 0.05f;
+		float angle = glm::radians(5.0f);
+		trans = glm::rotate(trans, angle, glm::vec3(0, 1, 0));
+	}
+	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
+	{
+		//gMixValue -= 0.05f;
+		float angle = glm::radians(-5.0f);
+		trans = glm::rotate(trans, angle, glm::vec3(0, 1, 0));
+	}
+
 
 	if (gMixValue > 1.0f)gMixValue = 1.0f;
 	if (gMixValue < 0.0f)gMixValue = 0.0f;
