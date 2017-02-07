@@ -173,16 +173,27 @@ int main()
 		glm::mat4 trans;
 
 		float angle = glm::radians(50.0f * (GLfloat)glfwGetTime());
+		
 		trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
 		trans = glm::rotate(trans, angle, glm::vec3(0,0,1));
 		
-
 
 		glUniformMatrix4fv(glGetUniformLocation(ourShader.Program, "transform"),1,GL_FALSE, glm::value_ptr(trans));
 
 		// Draw container
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
+		glm::mat4 trans2;
+
+		float scale = sin(glfwGetTime());
+		
+		trans2 = glm::translate(trans2, glm::vec3(-0.5f, 0.5f, 0.0f));
+		trans2 = glm::scale(trans2, glm::vec3(scale,scale,scale));
+		glUniformMatrix4fv(glGetUniformLocation(ourShader.Program, "transform"), 1, GL_FALSE, glm::value_ptr(trans2));
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
 		glBindVertexArray(0);
 
 		// Swap the screen buffers
