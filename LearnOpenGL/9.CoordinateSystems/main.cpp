@@ -202,7 +202,7 @@ int main()
 		glm::mat4 view;
 		glm::mat4 projection;
 		
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+		view = glm::translate(view, glm::vec3(-1.0f, 0.0f, -3.0f));
 		projection = glm::perspective(glm::radians(45.0f), (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
 		// Get their uniform location
 		GLint modelLoc = glGetUniformLocation(ourShader.Program, "model");
@@ -215,19 +215,22 @@ int main()
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 		// Draw container
+
 		glBindVertexArray(VAO);
-
-		for (GLuint i = 0;i<10;i++)
+		for (GLuint i = 0; i < 10; i++)
 		{
-
+			glm::mat4 model;
 			model = glm::translate(model, cubePositions[i]);
-			GLfloat angle = glm::radians(5.0f * (i+1) * glfwGetTime());
-			model = glm::rotate(model,angle, glm::vec3(1.0f, 0.3f, 0.5f));
+			GLfloat angle = 20.0f * i;
+			if (i % 3 == 0) {
+				angle = glfwGetTime()*25.0f;
+			}
+			model = glm::rotate(model, angle, glm::vec3(1.0f, 0.3f, 0.5f));
 			glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
 			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
-		
 
 		glBindVertexArray(0);
 
