@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{36D94887-EF06-4680-86D4-019C54EAEE8C}</ProjectGuid>
+    <ProjectGuid>{D0C9BA4E-8944-4FAA-8F7C-FE6DBE4830F5}</ProjectGuid>
     <RootNamespace>My3CreateWindow</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>4-HelloWindow</ProjectName>
+    <ProjectName>1-04 HelloTriangle</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

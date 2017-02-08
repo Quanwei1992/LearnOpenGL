@@ -22,7 +22,7 @@
     <ProjectGuid>{38CD53A9-F0EC-494D-B238-071180F510AA}</ProjectGuid>
     <RootNamespace>My3CreateWindow</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>9.CoordinateSystems</ProjectName>
+    <ProjectName>1-08 CoordinateSystems</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

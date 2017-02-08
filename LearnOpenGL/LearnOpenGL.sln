@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-HelloWindow", "3-CreateWindow\3-CreateWindow.vcxproj", "{36D94887-EF06-4680-86D4-019C54EAEE8C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-03 HelloWindow", "1-03 HelloWindow\1-03 HelloWindow.vcxproj", "{36D94887-EF06-4680-86D4-019C54EAEE8C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5-HelloTriangle", "5-HelloTriangle\5-HelloTriangle.vcxproj", "{D0C9BA4E-8944-4FAA-8F7C-FE6DBE4830F5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-04 HelloTriangle", "1-04 HelloTriangle\1-04 HelloTriangle.vcxproj", "{D0C9BA4E-8944-4FAA-8F7C-FE6DBE4830F5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "6-Shaders", "6-Shaders\6-Shaders.vcxproj", "{4E3E1BC4-EFEA-4B85-BE14-E61C65C108CB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-05 Shaders", "1-05 Shaders\1-05 Shaders.vcxproj", "{4E3E1BC4-EFEA-4B85-BE14-E61C65C108CB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "7-Textures", "7-Textures\7-Textures.vcxproj", "{EB620849-9603-4D83-BCE7-E7FE0E176FFB}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-06 Textures", "1-06 Textures\1-06 Textures.vcxproj", "{EB620849-9603-4D83-BCE7-E7FE0E176FFB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "8-Transformations", "8-Transformations\8-Transformations.vcxproj", "{40DDDB07-2200-4235-8467-86A51BCDA25A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-07 Transformations", "1-07 Transformations\1-07 Transformations.vcxproj", "{40DDDB07-2200-4235-8467-86A51BCDA25A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "9.CoordinateSystems", "9.CoordinateSystems\9.CoordinateSystems.vcxproj", "{38CD53A9-F0EC-494D-B238-071180F510AA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-09 Camera", "1-08 CoordinateSystems\1-08 CoordinateSystems.vcxproj", "{38CD53A9-F0EC-494D-B238-071180F510AA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-08 CoordinateSystems", "1-09 Camera\1-09 Camera.vcxproj", "{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,14 @@ Global
 		{38CD53A9-F0EC-494D-B238-071180F510AA}.Release|x64.Build.0 = Release|x64
 		{38CD53A9-F0EC-494D-B238-071180F510AA}.Release|x86.ActiveCfg = Release|Win32
 		{38CD53A9-F0EC-494D-B238-071180F510AA}.Release|x86.Build.0 = Release|Win32
+		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Debug|x64.ActiveCfg = Debug|x64
+		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Debug|x64.Build.0 = Debug|x64
+		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Debug|x86.ActiveCfg = Debug|Win32
+		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Debug|x86.Build.0 = Debug|Win32
+		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Release|x64.ActiveCfg = Release|x64
+		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Release|x64.Build.0 = Release|x64
+		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Release|x86.ActiveCfg = Release|Win32
+		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
