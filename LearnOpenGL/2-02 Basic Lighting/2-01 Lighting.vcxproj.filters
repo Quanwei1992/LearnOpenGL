@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Shader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\lighting.frag" />
+    <None Include="Resources\Shaders\lighting.vs" />
+    <None Include="Resources\Shaders\lamp.frag" />
+    <None Include="Resources\Shaders\lamp.vs" />
+  </ItemGroup>
+</Project>
