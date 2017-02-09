@@ -170,6 +170,10 @@ int main()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		lightPos.y = glm::cos(glfwGetTime());
+		lightPos.z = glm::sin(glfwGetTime());
+
+
 		// Use cooresponding shader when setting uniforms/drawing objects
 		lightingShader.Use();
 		GLint objectColorLoc = glGetUniformLocation(lightingShader.Program, "objectColor");
