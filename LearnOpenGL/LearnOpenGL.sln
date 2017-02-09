@@ -13,9 +13,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-06 Textures", "1-06 Textu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-07 Transformations", "1-07 Transformations\1-07 Transformations.vcxproj", "{40DDDB07-2200-4235-8467-86A51BCDA25A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-09 Camera", "1-08 CoordinateSystems\1-08 CoordinateSystems.vcxproj", "{38CD53A9-F0EC-494D-B238-071180F510AA}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-08 CoordinateSystems", "1-08 CoordinateSystems\1-08 CoordinateSystems.vcxproj", "{38CD53A9-F0EC-494D-B238-071180F510AA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-08 CoordinateSystems", "1-09 Camera\1-09 Camera.vcxproj", "{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1-09 Camera", "1-09 Camera\1-09 Camera.vcxproj", "{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2-01 Lighting", "2-01 Lighting\2-01 Lighting.vcxproj", "{2DED63BF-C7CC-4FF2-8A44-0097C1DA4943}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,14 @@ Global
 		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Release|x64.Build.0 = Release|x64
 		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Release|x86.ActiveCfg = Release|Win32
 		{7DA993BF-7B54-4277-BEEC-0C6FC69D720B}.Release|x86.Build.0 = Release|Win32
+		{2DED63BF-C7CC-4FF2-8A44-0097C1DA4943}.Debug|x64.ActiveCfg = Debug|x64
+		{2DED63BF-C7CC-4FF2-8A44-0097C1DA4943}.Debug|x64.Build.0 = Debug|x64
+		{2DED63BF-C7CC-4FF2-8A44-0097C1DA4943}.Debug|x86.ActiveCfg = Debug|Win32
+		{2DED63BF-C7CC-4FF2-8A44-0097C1DA4943}.Debug|x86.Build.0 = Debug|Win32
+		{2DED63BF-C7CC-4FF2-8A44-0097C1DA4943}.Release|x64.ActiveCfg = Release|x64
+		{2DED63BF-C7CC-4FF2-8A44-0097C1DA4943}.Release|x64.Build.0 = Release|x64
+		{2DED63BF-C7CC-4FF2-8A44-0097C1DA4943}.Release|x86.ActiveCfg = Release|Win32
+		{2DED63BF-C7CC-4FF2-8A44-0097C1DA4943}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
