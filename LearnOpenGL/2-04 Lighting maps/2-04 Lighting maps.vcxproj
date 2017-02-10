@@ -141,6 +141,7 @@
     <Image Include="Resources\Textures\container.jpg" />
     <Image Include="Resources\Textures\container2.png" />
     <Image Include="Resources\Textures\container2_specular.png" />
+    <Image Include="Resources\Textures\matrix.jpg" />
     <Image Include="Resources\Textures\wall.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

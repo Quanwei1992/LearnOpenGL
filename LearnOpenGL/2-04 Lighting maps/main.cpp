@@ -80,7 +80,7 @@ int main()
 	int width, height;
 	unsigned char* image;
 
-	GLuint containerDiffuseTexture,containerSpecularTexture;
+	GLuint containerDiffuseTexture,containerSpecularTexture,emissiorTexture;
 	// diffuse texture
 	image = SOIL_load_image("Resources/Textures/container2.png", &width, &height, 0, SOIL_LOAD_RGB);
 	glGenTextures(1, &containerDiffuseTexture);
@@ -97,6 +97,13 @@ int main()
 	glGenerateMipmap(GL_TEXTURE_2D);
 	SOIL_free_image_data(image);
 
+	// emissior texture
+	image = SOIL_load_image("Resources/Textures/matrix.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+	glGenTextures(1, &emissiorTexture);
+	glBindTexture(GL_TEXTURE_2D, emissiorTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	SOIL_free_image_data(image);
 
 
 
@@ -190,6 +197,10 @@ int main()
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, containerSpecularTexture);
 	glUniform1i(glGetUniformLocation(lightingShader.Program, "material.specular"), 1);
+
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, emissiorTexture);
+	glUniform1i(glGetUniformLocation(lightingShader.Program, "material.emissior"), 2);
 
 	// Game loop
 	while (!glfwWindowShouldClose(window))
