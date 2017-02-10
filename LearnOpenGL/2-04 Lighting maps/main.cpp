@@ -78,14 +78,28 @@ int main()
 
 	// Load texture
 	int width, height;
-	unsigned char* image = SOIL_load_image("Resources/Textures/container2.png", &width, &height, 0, SOIL_LOAD_RGB);
+	unsigned char* image;
 
-	GLuint containerDiffuseTexture;
+	GLuint containerDiffuseTexture,containerSpecularTexture;
+	// diffuse texture
+	image = SOIL_load_image("Resources/Textures/container2.png", &width, &height, 0, SOIL_LOAD_RGB);
 	glGenTextures(1, &containerDiffuseTexture);
 	glBindTexture(GL_TEXTURE_2D, containerDiffuseTexture);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	SOIL_free_image_data(image);
+
+	// specular texture
+	image = SOIL_load_image("Resources/Textures/container2_specular.png", &width, &height, 0, SOIL_LOAD_RGB);
+	glGenTextures(1, &containerSpecularTexture);
+	glBindTexture(GL_TEXTURE_2D, containerSpecularTexture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	SOIL_free_image_data(image);
+
+
+
+
 
 	// Build and compile our shader program
 	Shader lightingShader("Resources/Shaders/lighting.vs", "Resources/Shaders/lighting.frag");
@@ -168,11 +182,14 @@ int main()
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 
+	lightingShader.Use();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, containerDiffuseTexture);
-	lightingShader.Use();
-
 	glUniform1i(glGetUniformLocation(lightingShader.Program, "material.diffuse"),0);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, containerSpecularTexture);
+	glUniform1i(glGetUniformLocation(lightingShader.Program, "material.specular"), 1);
 
 	// Game loop
 	while (!glfwWindowShouldClose(window))
