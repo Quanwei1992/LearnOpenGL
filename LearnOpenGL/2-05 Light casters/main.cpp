@@ -224,9 +224,18 @@ int main()
 
 		// Use cooresponding shader when setting uniforms/drawing objects
 		lightingShader.Use();
-		GLint lightDirPos = glGetUniformLocation(lightingShader.Program, "light.direction");	
+		GLint lighPosLoc = glGetUniformLocation(lightingShader.Program, "light.position");
+		glUniform3f(lighPosLoc,camera.Position.x, camera.Position.y, camera.Position.z);	
+		GLint lightSpotdirLoc = glGetUniformLocation(lightingShader.Program, "light.direction");
+		glUniform3f(lightSpotdirLoc, camera.Front.x, camera.Front.y, camera.Front.z);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "light.cutOff"), glm::cos(glm::radians(12.5f)));
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "light.outerCutOff"), glm::cos(glm::radians(17.5f)));
+
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "light.constant"), 1.0f);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "light.linear"), 0.09);
+		glUniform1f(glGetUniformLocation(lightingShader.Program, "light.quadratic"), 0.032);
 		GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
-		glUniform3f(lightDirPos, -0.2f, -1.0f, -0.3f);
+		
 		glUniform3f(viewPosLoc, camera.Position.x, camera.Position.y, camera.Position.z);
 		// Set lights properties
 		glUniform3f(glGetUniformLocation(lightingShader.Program, "light.ambient"), 0.5f, 0.5f, 0.5f);
