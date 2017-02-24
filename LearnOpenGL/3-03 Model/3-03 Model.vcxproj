@@ -22,7 +22,7 @@
     <ProjectGuid>{EB5D8391-D762-439E-87D4-39BF55D874E5}</ProjectGuid>
     <RootNamespace>My3CreateWindow</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>3-02 Mesh</ProjectName>
+    <ProjectName>3-03 Model</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -124,27 +124,47 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Shader.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shaders\lamp.frag" />
-    <None Include="Resources\Shaders\lamp.vs" />
-    <None Include="Resources\Shaders\lighting.frag" />
-    <None Include="Resources\Shaders\lighting.vs" />
+    <None Include="Resources\Models\nanosuit\nanosuit.blend" />
+    <None Include="Resources\Models\nanosuit\nanosuit.mtl" />
+    <None Include="Resources\Shaders\diffuse.frag" />
+    <None Include="Resources\Shaders\diffuse.vs" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Models\nanosuit\arm_dif.png" />
+    <Image Include="Resources\Models\nanosuit\arm_showroom_ddn.png" />
+    <Image Include="Resources\Models\nanosuit\arm_showroom_spec.png" />
+    <Image Include="Resources\Models\nanosuit\body_dif.png" />
+    <Image Include="Resources\Models\nanosuit\body_showroom_ddn.png" />
+    <Image Include="Resources\Models\nanosuit\body_showroom_spec.png" />
+    <Image Include="Resources\Models\nanosuit\glass_ddn.png" />
+    <Image Include="Resources\Models\nanosuit\glass_dif.png" />
+    <Image Include="Resources\Models\nanosuit\hand_dif.png" />
+    <Image Include="Resources\Models\nanosuit\hand_showroom_ddn.png" />
+    <Image Include="Resources\Models\nanosuit\hand_showroom_spec.png" />
+    <Image Include="Resources\Models\nanosuit\helmet_diff.png" />
+    <Image Include="Resources\Models\nanosuit\helmet_showroom_ddn.png" />
+    <Image Include="Resources\Models\nanosuit\helmet_showroom_spec.png" />
+    <Image Include="Resources\Models\nanosuit\leg_dif.png" />
+    <Image Include="Resources\Models\nanosuit\leg_showroom_ddn.png" />
+    <Image Include="Resources\Models\nanosuit\leg_showroom_spec.png" />
     <Image Include="Resources\Textures\awesomeface.png" />
     <Image Include="Resources\Textures\container.jpg" />
     <Image Include="Resources\Textures\container2.png" />
     <Image Include="Resources\Textures\container2_specular.png" />
     <Image Include="Resources\Textures\matrix.jpg" />
     <Image Include="Resources\Textures\wall.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Models\nanosuit\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

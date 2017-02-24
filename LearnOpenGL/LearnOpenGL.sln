@@ -29,7 +29,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2-05 Light casters", "2-05 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2-06 Multiple lights", "2-06 Multiple lights\2-06 Multiple lights.vcxproj", "{A2CCC797-D218-4C23-99C8-1B6707B86A8A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3-02 Mesh", "3-02 Mesh\3-02 Mesh.vcxproj", "{EB5D8391-D762-439E-87D4-39BF55D874E5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3-03 Model", "3-03 Model\3-03 Model.vcxproj", "{EB5D8391-D762-439E-87D4-39BF55D874E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
