@@ -31,7 +31,7 @@ void do_movement();
 const GLuint WIDTH = 800, HEIGHT = 600;
 
 // Camera
-Camera  camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera  camera(glm::vec3(5.0f, 15.0f, 15.0f));
 GLfloat lastX = WIDTH / 2.0;
 GLfloat lastY = HEIGHT / 2.0;
 bool    keys[1024];
