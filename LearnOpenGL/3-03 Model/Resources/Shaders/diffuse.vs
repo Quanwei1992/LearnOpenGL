@@ -18,7 +18,7 @@ void main()
     TexCoords = texCoords;
     FragPos = vec3(view * model * vec4(position,1.0f));
     vec3 lightPos = vec3(0.0f,10.0f,3.0f);
-    LightPos = vec3(view  * vec4(lightPos,1.0f));
+    LightPos = vec3(view  *  vec4(lightPos,1.0f));
     //计算法向量的坐标，需要得到model矩阵的正规矩阵，model矩阵的逆矩阵的转置矩阵就是正规矩阵
     Normal = mat3(transpose(inverse(view * model)))  * normal;
 }

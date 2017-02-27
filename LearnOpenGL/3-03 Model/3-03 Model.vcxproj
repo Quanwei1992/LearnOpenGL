@@ -137,6 +137,8 @@
     <None Include="Resources\Models\nanosuit\nanosuit.mtl" />
     <None Include="Resources\Shaders\diffuse.frag" />
     <None Include="Resources\Shaders\diffuse.vs" />
+    <None Include="Resources\Shaders\sample.frag" />
+    <None Include="Resources\Shaders\sample.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Models\nanosuit\arm_dif.png" />

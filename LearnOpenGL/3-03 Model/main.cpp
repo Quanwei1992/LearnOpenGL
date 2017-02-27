@@ -80,7 +80,7 @@ int main()
 
 	// Build and compile our shader program
 	Shader lightingShader("Resources/Shaders/diffuse.vs", "Resources/Shaders/diffuse.frag");
-
+	Shader sampleShader("Resources/Shaders/sample.vs", "Resources/Shaders/sample.frag");
 	// Positions of the point lights
 	glm::vec3 pointLightPositions[] = {
 		glm::vec3(0.7f,  0.2f,  2.0f),
@@ -92,7 +92,7 @@ int main()
 
 	// Load model
 	Model nanosuit("Resources/Models/nanosuit/nanosuit.obj");
-
+	Model ball("Resources/Models/alien_ball_bearing.stl");
 
 
 	// Game loop
@@ -122,6 +122,9 @@ int main()
 		glm::mat4 view;
 		view = camera.GetViewMatrix();
 		glm::mat4 projection = glm::perspective(camera.Zoom, (GLfloat)WIDTH / (GLfloat)HEIGHT, 0.1f, 100.0f);
+
+		// 绘制人物模型
+
 		// Get the uniform locations
 		GLint modelLoc = glGetUniformLocation(lightingShader.Program, "model");
 		GLint viewLoc = glGetUniformLocation(lightingShader.Program, "view");
@@ -138,6 +141,26 @@ int main()
 	    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		
 		nanosuit.Draw(lightingShader);
+
+		//绘制灯模型
+		sampleShader.Use();
+
+		// Get the uniform locations
+		modelLoc = glGetUniformLocation(sampleShader.Program, "model");
+		viewLoc = glGetUniformLocation(sampleShader.Program, "view");
+		projLoc = glGetUniformLocation(sampleShader.Program, "projection");
+		// Pass the matrices to the shader
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+		// Draw 10 containers with the same VAO and VBO information; only their world space coordinates differ
+		model = glm::mat4();	
+		model = glm::translate(model, glm::vec3(0.0, 15.0, 2.0));
+		model = glm::scale(model, glm::vec3(0.01, 0.01, 0.01));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+		ball.Draw(sampleShader);
+
 
 
 		// Swap the screen buffers
