@@ -37,7 +37,7 @@ GLfloat lastY = HEIGHT / 2.0;
 bool    keys[1024];
 
 // Light attributes
-glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+glm::vec3 lightPos(0.0f, 15.0f, 2.0f);
 
 // Deltatime
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
@@ -81,14 +81,6 @@ int main()
 	// Build and compile our shader program
 	Shader lightingShader("Resources/Shaders/diffuse.vs", "Resources/Shaders/diffuse.frag");
 	Shader sampleShader("Resources/Shaders/sample.vs", "Resources/Shaders/sample.frag");
-	// Positions of the point lights
-	glm::vec3 pointLightPositions[] = {
-		glm::vec3(0.7f,  0.2f,  2.0f),
-		glm::vec3(2.3f, -3.3f, -4.0f),
-		glm::vec3(-4.0f,  2.0f, -12.0f),
-		glm::vec3(0.0f,  0.0f, -3.0f)
-	};
-	
 
 	// Load model
 	Model nanosuit("Resources/Models/nanosuit/nanosuit.obj");
@@ -129,9 +121,11 @@ int main()
 		GLint modelLoc = glGetUniformLocation(lightingShader.Program, "model");
 		GLint viewLoc = glGetUniformLocation(lightingShader.Program, "view");
 		GLint projLoc = glGetUniformLocation(lightingShader.Program, "projection");
+		GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "lightPos");
 		// Pass the matrices to the shader
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
 
 		// Draw 10 containers with the same VAO and VBO information; only their world space coordinates differ
 		glm::mat4 model = glm::mat4();
@@ -155,7 +149,7 @@ int main()
 
 		// Draw 10 containers with the same VAO and VBO information; only their world space coordinates differ
 		model = glm::mat4();	
-		model = glm::translate(model, glm::vec3(0.0, 15.0, 2.0));
+		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.01, 0.01, 0.01));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
