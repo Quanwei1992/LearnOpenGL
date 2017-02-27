@@ -20,6 +20,7 @@ struct Material
 
 struct Light
 {
+	vec3 direction;
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
@@ -29,11 +30,16 @@ struct Light
 void main()
 {    
 
-    // 灯
+
+
+
+    // 平行光
 	struct Light light;
 	light.ambient = vec3(0.2f, 0.2f, 0.2f);
 	light.diffuse = vec3(0.5f, 0.5f, 0.5f);
 	light.specular = vec3(1.0f, 1.0f, 1.0f);
+	light.direction = vec3(0.2f,-1.0f,-0.3f);
+
 
 
 	// 材质 Gold
@@ -47,7 +53,7 @@ void main()
 	vec3 ambient = light.ambient * vec3(texture(texture_diffuse1,TexCoords));
 	// 漫反射光
 	vec3 norm = normalize(Normal);
-	vec3 lightDir = normalize(LightPos - FragPos);
+	vec3 lightDir = normalize(-light.direction);
 	float diff = max(dot(norm,lightDir),0.0f);
 	vec3 diffuse =  light.diffuse * vec3(texture(texture_diffuse1,TexCoords)) * diff;
 
