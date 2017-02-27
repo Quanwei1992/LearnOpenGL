@@ -20,10 +20,13 @@ struct Material
 
 struct Light
 {
-	vec3 direction;
 	vec3 ambient;
 	vec3 diffuse;
 	vec3 specular;
+
+	float constant;
+	float linear;
+	float quadratic;
 };
 
 
@@ -33,12 +36,15 @@ void main()
 
 
 
-    // 平行光
+    // 点光
 	struct Light light;
 	light.ambient = vec3(0.2f, 0.2f, 0.2f);
 	light.diffuse = vec3(0.5f, 0.5f, 0.5f);
 	light.specular = vec3(1.0f, 1.0f, 1.0f);
-	light.direction = vec3(0.2f,-1.0f,-0.3f);
+
+	light.constant = 1.0f;
+	light.linear = 0.09f;
+	light.quadratic = 0.032f;
 
 
 
@@ -53,7 +59,7 @@ void main()
 	vec3 ambient = light.ambient * vec3(texture(texture_diffuse1,TexCoords));
 	// 漫反射光
 	vec3 norm = normalize(Normal);
-	vec3 lightDir = normalize(-light.direction);
+	vec3 lightDir = normalize(LightPos - FragPos);
 	float diff = max(dot(norm,lightDir),0.0f);
 	vec3 diffuse =  light.diffuse * vec3(texture(texture_diffuse1,TexCoords)) * diff;
 
@@ -64,7 +70,15 @@ void main()
 	float spec = pow(max(dot(viewDir,reflecDir),0.0),material.shininess);
 	vec3 specular = light.specular * vec3(texture(texture_specular1,TexCoords)) * spec;
 
-	
+	// 计算点光衰减
+	float distance = length(LightPos - FragPos);
+	float attenuation = 1.0f/(light.constant + light.linear*distance+light.quadratic*distance*distance);
+
+	ambient *= attenuation;
+	diffuse *= attenuation;
+	specular *= attenuation;
+
+
 	vec3 result = ambient + diffuse + specular;
     color = vec4(result,1.0f);
 }
