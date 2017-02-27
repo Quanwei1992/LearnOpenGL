@@ -132,6 +132,9 @@ int main()
 
 		// Draw 10 containers with the same VAO and VBO information; only their world space coordinates differ
 		glm::mat4 model = glm::mat4();
+
+		model = glm::rotate(model, glm::radians( (GLfloat)glfwGetTime() * 50.0f), glm::vec3(0,1,0));
+
 	    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		
 		nanosuit.Draw(lightingShader);
