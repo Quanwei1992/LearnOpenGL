@@ -43,8 +43,8 @@ void main()
 	light.specular = vec3(1.0f, 1.0f, 1.0f);
 
 	light.constant = 1.0f;
-	light.linear = 0.09f;
-	light.quadratic = 0.032f;
+	light.linear = 0.027f;
+	light.quadratic = 0.0028f;
 
 
 

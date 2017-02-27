@@ -149,6 +149,11 @@ int main()
 
 		// Draw 10 containers with the same VAO and VBO information; only their world space coordinates differ
 		model = glm::mat4();	
+
+		lightPos.y = 10.0f;
+		lightPos.x = 8.0 * glm::cos(glfwGetTime() * glm::radians(20.0f));
+		lightPos.z = 8.0 * glm::sin(glfwGetTime() * glm::radians(20.0f));
+
 		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.01, 0.01, 0.01));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
