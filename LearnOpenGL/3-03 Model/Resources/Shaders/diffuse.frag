@@ -7,7 +7,7 @@ in vec3 LightPos;
 out vec4 color;
 
 uniform sampler2D texture_diffuse1;
-
+uniform sampler2D texture_specular1;
 
 struct Material
 {
@@ -44,19 +44,19 @@ void main()
 	material.shininess = 51.2f;
 
 	// 环境光
-	vec3 ambient = light.ambient * material.ambient;
+	vec3 ambient = light.ambient * vec3(texture(texture_diffuse1,TexCoords));
 	// 漫反射光
 	vec3 norm = normalize(Normal);
 	vec3 lightDir = normalize(LightPos - FragPos);
 	float diff = max(dot(norm,lightDir),0.0f);
-	vec3 diffuse =  light.diffuse * material.diffuse * diff;
+	vec3 diffuse =  light.diffuse * vec3(texture(texture_diffuse1,TexCoords)) * diff;
 
 
 	//计算镜面光
 	vec3 viewDir = normalize(-FragPos);
 	vec3 reflecDir = reflect(-lightDir,norm);
 	float spec = pow(max(dot(viewDir,reflecDir),0.0),material.shininess);
-	vec3 specular = light.specular * material.specular * spec;
+	vec3 specular = light.specular * vec3(texture(texture_specular1,TexCoords)) * spec;
 
 	
 	vec3 result = ambient + diffuse + specular;
