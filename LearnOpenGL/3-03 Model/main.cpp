@@ -37,7 +37,7 @@ GLfloat lastY = HEIGHT / 2.0;
 bool    keys[1024];
 
 // Light attributes
-glm::vec3 lightPos(0.0f, 15.0f, 2.0f);
+glm::vec3 lightPos(0.0f, 10.0f, 8.0f);
 
 // Deltatime
 GLfloat deltaTime = 0.0f;	// Time between current frame and last frame
@@ -105,9 +105,6 @@ int main()
 
 
 		// Use cooresponding shader when setting uniforms/drawing objects
-		lightingShader.Use();
-		GLint viewPosLoc = glGetUniformLocation(lightingShader.Program, "viewPos");
-		glUniform3f(viewPosLoc, camera.Position.x, camera.Position.y, camera.Position.z);
 		
 
 		// Create camera transformations
@@ -117,20 +114,37 @@ int main()
 
 		// 绘制人物模型
 
+
+		lightingShader.Use();
+
 		// Get the uniform locations
-		GLint modelLoc = glGetUniformLocation(lightingShader.Program, "model");
-		GLint viewLoc = glGetUniformLocation(lightingShader.Program, "view");
-		GLint projLoc = glGetUniformLocation(lightingShader.Program, "projection");
-		GLint lightPosLoc = glGetUniformLocation(lightingShader.Program, "lightPos");
+		GLint modelLoc = lightingShader.GetUniformLocation("model");
+		GLint viewLoc = lightingShader.GetUniformLocation("view");
+		GLint projLoc = lightingShader.GetUniformLocation("projection");
 		// Pass the matrices to the shader
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
-		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
 
-		// Draw 10 containers with the same VAO and VBO information; only their world space coordinates differ
+
+		// light
+		lightingShader.SetUniformValue("viewPos", camera.Position.x, camera.Position.y, camera.Position.z);
+		lightingShader.SetUniformValue("light.position", camera.Position.x, camera.Position.y, camera.Position.z);
+		lightingShader.SetUniformValue("light.direction", camera.Front.x, camera.Front.y, camera.Front.z);
+		lightingShader.SetUniformValue("light.cutOff", glm::cos(glm::radians(12.5f)));
+
+		lightingShader.SetUniformValue("light.ambient", 0.1f, 0.1f, 0.1f);
+		// We set the diffuse intensity a bit higher; note that the right lighting conditions differ with each lighting method and environment.
+		// Each environment and lighting type requires some tweaking of these variables to get the best out of your environment.
+		lightingShader.SetUniformValue("light.diffuse", 0.8f, 0.8f, 0.8f);
+		lightingShader.SetUniformValue("light.specular", 1.0f, 1.0f, 1.0f);
+		lightingShader.SetUniformValue("light.constant", 1.0f);
+		lightingShader.SetUniformValue("light.linear", 0.09);
+		lightingShader.SetUniformValue("light.quadratic", 0.032);
+
+
+
 		glm::mat4 model = glm::mat4();
 
-		model = glm::rotate(model, glm::radians( (GLfloat)glfwGetTime() * 50.0f), glm::vec3(0,1,0));
 
 	    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		
@@ -148,11 +162,7 @@ int main()
 		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 		// Draw 10 containers with the same VAO and VBO information; only their world space coordinates differ
-		model = glm::mat4();	
-
-		lightPos.y = 10.0f;
-		lightPos.x = 8.0 * glm::cos(glfwGetTime() * glm::radians(20.0f));
-		lightPos.z = 8.0 * glm::sin(glfwGetTime() * glm::radians(20.0f));
+		model = glm::mat4();
 
 		model = glm::translate(model, lightPos);
 		model = glm::scale(model, glm::vec3(0.01, 0.01, 0.01));
