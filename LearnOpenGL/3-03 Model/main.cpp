@@ -131,6 +131,7 @@ int main()
 		lightingShader.SetUniformValue("light.position", camera.Position.x, camera.Position.y, camera.Position.z);
 		lightingShader.SetUniformValue("light.direction", camera.Front.x, camera.Front.y, camera.Front.z);
 		lightingShader.SetUniformValue("light.cutOff", glm::cos(glm::radians(12.5f)));
+		lightingShader.SetUniformValue("light.outerCutOff", glm::cos(glm::radians(17.5f)));
 
 		lightingShader.SetUniformValue("light.ambient", 0.1f, 0.1f, 0.1f);
 		// We set the diffuse intensity a bit higher; note that the right lighting conditions differ with each lighting method and environment.
