@@ -33,7 +33,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3-03 Model", "3-03 Model\3-
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-01 Depth testing", "4-01 Depth testing\4-01 Depth testing.vcxproj", "{EBE67BB5-3E27-4EDD-8E45-F6545335E835}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-02 Stencil testing", "4-01 Stencil testing\Stencil testing.vcxproj", "{2BE4B887-679E-4215-ACC3-B0D165D4F3C0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "4-02 Stencil testing", "4-02 Stencil testing\Stencil testing.vcxproj", "{2BE4B887-679E-4215-ACC3-B0D165D4F3C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
