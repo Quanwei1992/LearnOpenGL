@@ -135,13 +135,13 @@ int main()
 	};
 	GLfloat quadVertices[] = {   // Vertex attributes for a quad that fills the entire screen in Normalized Device Coordinates.
 								 // Positions   // TexCoords
-		-1.0f,  1.0f,  0.0f, 1.0f,
-		-1.0f, -1.0f,  0.0f, 0.0f,
-		1.0f, -1.0f,  1.0f, 0.0f,
+		-0.25f,  1.0f,  0.0f, 1.0f,
+		-0.25f, 0.8f,  0.0f, 0.0f,
+		0.25f, 0.8f,  1.0f, 0.0f,
 
-		-1.0f,  1.0f,  0.0f, 1.0f,
-		1.0f, -1.0f,  1.0f, 0.0f,
-		1.0f,  1.0f,  1.0f, 1.0f
+		-0.25f,  1.0f,  0.0f, 1.0f,
+		0.25f, 0.8f,  1.0f, 0.0f,
+		0.25f,  1.0f,  1.0f, 1.0f
 	};
 
 	// Setup cube VAO
@@ -180,6 +180,7 @@ int main()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)(2 * sizeof(GLfloat)));
 	glBindVertexArray(0);
+
 
 	// Load textures
 	GLuint cubeTexture = loadTexture("Resources/Textures/container.jpg");
@@ -235,7 +236,14 @@ int main()
 		// Set uniforms
 		shader.Use();
 		glm::mat4 model;
+		camera.Yaw += 180.0f; // Turn the camera's yaw 180 degrees around
+		camera.Pitch += 180.0f; // Turn the camera's pitch 180 degrees around
+		camera.ProcessMouseMovement(0, 0, GL_FALSE); // Call this to make sure it updates its camera vectors (should probably create an update function ;)), Note that we removed the pitch constrains for this specific case in the camera class via a boolean (otherwise we can't reverse camera's pitch values)
 		glm::mat4 view = camera.GetViewMatrix();
+		camera.Yaw -= 180.0f; // Reset it back to what it was
+		camera.Pitch -= 180.0f;
+		camera.ProcessMouseMovement(0, 0, GL_FALSE); // Pitch constraint boolean is set to true as default.
+		
 		glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
 		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
@@ -259,14 +267,51 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 
+
+
+		// second pass
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		// Clear all attached buffers        
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // We're not using stencil buffer so why bother with clearing?
+
+		glEnable(GL_DEPTH_TEST);
+		view = camera.GetViewMatrix();
+		// Set uniforms
+		shader.Use();
+		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
+		// Floor
+		glBindVertexArray(floorVAO);
+		glBindTexture(GL_TEXTURE_2D, floorTexture);
+		model = glm::mat4();
+		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindVertexArray(0);
+		// Cubes
+		glBindVertexArray(cubeVAO);
+		glBindTexture(GL_TEXTURE_2D, cubeTexture);
+		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
+		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		model = glm::mat4();
+		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(glGetUniformLocation(shader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+
+
+
+
 		/////////////////////////////////////////////////////
 		// Bind to default framebuffer again and draw the 
 		// quad plane with attched screen texture.
 		// //////////////////////////////////////////////////
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		// Clear all relevant buffers
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set clear color to white (not really necessery actually, since we won't be able to see behind the quad anyways)
-		glClear(GL_COLOR_BUFFER_BIT);
+		//glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set clear color to white (not really necessery actually, since we won't be able to see behind the quad anyways)
+		//glClear(GL_COLOR_BUFFER_BIT);
 		glDisable(GL_DEPTH_TEST); // We don't care about depth information when rendering a single quad
 
 								  // Draw Screen
