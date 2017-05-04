@@ -72,7 +72,7 @@ int main()
 	glViewport(0, 0, screenWidth, screenHeight);
 
 	// Setup some OpenGL options
-	glDepthFunc(GL_LESS);
+	glDepthFunc(GL_LEQUAL);
 
 	// Setup and compile our shaders
 	Shader cubeShader("Resources/Shaders/advanced.vs", "Resources/Shaders/advanced.frag");
@@ -232,25 +232,9 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // We're not using stencil buffer so why bother with clearing?
 
 
-		// 绘制天空盒
-
-		glDisable(GL_DEPTH_TEST);
-		// 设置Uniforms
-		// Set uniforms
-		skyboxShader.Use();
 		glm::mat4 model;
-		glm::mat4 view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
-		glm::mat4 projection = glm::perspective(camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
-		glUniformMatrix4fv(glGetUniformLocation(skyboxShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
-		glUniformMatrix4fv(glGetUniformLocation(skyboxShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-
-		//渲染
-		glBindVertexArray(skyboxVAO);
-		glBindTexture(GL_TEXTURE_CUBE_MAP,cubemapTexture);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glBindVertexArray(0);
-		//skybox
-
+		glm::mat4 view;
+		glm::mat4 projection;
 
 
 		// 绘制箱子
@@ -271,6 +255,30 @@ int main()
 		glUniformMatrix4fv(glGetUniformLocation(cubeShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
+
+
+
+		// 绘制天空盒
+
+		glEnable(GL_DEPTH_TEST);
+		// 设置Uniforms
+		// Set uniforms
+		skyboxShader.Use();
+		view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
+		projection = glm::perspective(camera.Zoom, (float)screenWidth / (float)screenHeight, 0.1f, 100.0f);
+		glUniformMatrix4fv(glGetUniformLocation(skyboxShader.Program, "view"), 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(glGetUniformLocation(skyboxShader.Program, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+
+		//渲染
+		glBindVertexArray(skyboxVAO);
+		glBindTexture(GL_TEXTURE_CUBE_MAP,cubemapTexture);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+		glBindVertexArray(0);
+		//skybox
+
+
+
+
 
 		// Swap the buffers
 		glfwSwapBuffers(window);
