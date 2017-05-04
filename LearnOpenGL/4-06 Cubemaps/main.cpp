@@ -21,6 +21,7 @@ using namespace std;
 
 // Other Libs
 #include <SOIL/SOIL.h>
+#include "Model.h"
 
 // Properties
 GLuint screenWidth = 800, screenHeight = 600;
@@ -206,6 +207,9 @@ int main()
 	skyboxFaces.push_back("Resources/Textures/skybox/front.jpg");
 	GLuint cubemapTexture = loadCubemap(skyboxFaces);
 
+	// load model 
+	Model nanosuitModel("Resources/Models/nanosuit/nanosuit.obj");
+
 #pragma endregion
 
 
@@ -251,11 +255,7 @@ int main()
 		glBindTexture(GL_TEXTURE_2D, cubeTexture);
 		model = glm::translate(model, glm::vec3(-1.0f, 0.0f, -1.0f));
 		glUniformMatrix4fv(glGetUniformLocation(cubeShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		model = glm::mat4();
-		model = glm::translate(model, glm::vec3(2.0f, 0.0f, 0.0f));
-		glUniformMatrix4fv(glGetUniformLocation(cubeShader.Program, "model"), 1, GL_FALSE, glm::value_ptr(model));
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		nanosuitModel.Draw(cubeShader);
 		glBindVertexArray(0);
 
 
@@ -277,9 +277,6 @@ int main()
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 		//skybox
-
-
-
 
 
 		// Swap the buffers
